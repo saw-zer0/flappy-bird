@@ -9,11 +9,14 @@ class Bird {
         this.dy = 2;
         this.crash = false;
         this.flap = 1;
+        this.angle = 0;
     }
 
     moveBird() {
-        if(!this.grounded()){
-        this.y += this.dy;}
+        if (!this.grounded()) {
+            this.y += this.dy;
+        };
+
     }
 
     drawBird() {
@@ -23,13 +26,13 @@ class Bird {
         let height = 13;
         let x = this.x;
         let y = this.y;
-        if(this.flap === 1){
+        if (this.flap === 1) {
             locX = 2;
             locY = 490;
-        }else if(this.flap === 2){
+        } else if (this.flap === 2) {
             locX = 30;
             locY = 490;
-        }else{
+        } else {
             locX = 58;
             locY = 490;
             this.flap = 1;
@@ -39,7 +42,10 @@ class Bird {
     }
 
     updateBird() {
+        this.ctx.save();
+        this.rotate();
         this.drawBird();
+        this.ctx.restore();
         this.moveBird();
 
         this.gravity();
@@ -56,6 +62,9 @@ class Bird {
         if (!this.crash) {
             this.dy = -10.5;
         }
+        if (this.y <= -70) {
+            this.y = -70;
+        }
     }
 
     grounded() {
@@ -67,11 +76,25 @@ class Bird {
     }
 
 
-    addEvents(){
+    addEvents() {
         window.addEventListener('click', (event) => {
             this.jump();
         })
 
+    }
+
+    rotate() {
+        this.ctx.translate(this.x + this.width / 2, this.y + this.height / 2)
+        if (this.angle === 45 || this.angle === -90) {
+            
+        } else if (this.dy < 0) {
+            this.angle-=4;
+            
+        }else if(this.dy > 0){
+            this.angle+=4;
+        }
+        this.ctx.rotate(this.angle * Math.PI / 180);
+        this.ctx.translate(-(this.x + this.width / 2), -(this.y + this.height / 2));
     }
 }
 
