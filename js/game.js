@@ -29,7 +29,7 @@ class Game {
         this.score = 0;
         this.animationCounter = 1;
         this.image = new Image();
-        this.image.src = '/assets/sprite-sheet.png';
+        this.image.src = './assets/sprite-sheet.png';
         this.image.onload = () => {
             this.generatePlayer();
             this.generatePipe();
