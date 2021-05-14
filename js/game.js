@@ -9,7 +9,7 @@ class Game {
 
     init() {
         this.image = new Image();
-        this.image.src = '/assets/sprite-sheet.png';
+        this.image.src = './assets/sprite-sheet.png';
         this.image.onload = () => {
             this.drawBg();
             this.drawFg();
@@ -127,7 +127,6 @@ class Game {
                 window.cancelAnimationFrame(this.animate);
                 document.getElementById('start-menu').style.display = 'block';
             })
-
         }
     }
 }
